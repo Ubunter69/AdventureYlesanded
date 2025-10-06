@@ -1,5 +1,5 @@
+-------------------ül 32
 select * from DimEmployee
-
 
 CREATE FUNCTION fn_ILTVF_GetEmployees()
 RETURNS TABLE
@@ -14,7 +14,7 @@ select * from fn_ILTVF_GetEmployees();
 CREATE FUNCTION fn_MSTVF_GetEmployees()
 RETURNS @Table TABLE 
 (
-    EmloyeeKey INT, 
+    EmployeeKey INT, 
     FirstName NVARCHAR(20), 
     DOB DATE
 )
@@ -30,4 +30,7 @@ BEGIN
     RETURN;
 END;
 
-SELECT * FROM fn_MSTVF_GetEmployees();
+SELECT * FROM fn_MSTVF_GetEmployees()
+--------Ül 33
+select * from DimEmployee
+--- Esimine Funktsion
