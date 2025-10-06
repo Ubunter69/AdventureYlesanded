@@ -17,3 +17,4 @@ id_rsa.pub on vaja lisada github'i nagu deploy key
 
 ssh-keygen -o -t rsa -C "mareklukk8@gmail.com"
 git remote set-url origin git@github.com:Ubunter69/AdventureYlesanded(vahetada https to ssh)
+git reset --soft HEAD~1(Отменяет последний коммит, без изменений кода и др.)
