@@ -1,5 +1,14 @@
 cd desktop
 git config user.name "Marek Lukk"
 git config user.email "mareklukk8@gmail.com"
-git init AdventureLukk
-git config --global user.name "Marek Lukk"
+git init 
+git config --global --list
+
+------
+git status
+muudatuste kinnitamine
+git add . 
+git commit -a -m "tegevus mis on tehtud"
+
+git push
+ test
