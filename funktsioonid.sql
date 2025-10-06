@@ -31,6 +31,37 @@ BEGIN
 END;
 
 SELECT * FROM fn_MSTVF_GetEmployees()
---------Ül 33
-select * from DimEmployee
---- Esimine Funktsion
+--------------------Ül 33
+Create Function fn_GetEmployeeNameById(@EmployeeKey int)
+
+Returns nvarchar(20)
+as
+Begin
+return (select FirstName from DimEmployee Where EmployeeKey = @EmployeeKey)
+End
+
+exec sp_helptext fn_GetEmployeeNameById;
+
+-----alter funktsioon
+Alter Function fn_GetEmployeeNameById(@EmployeeKey int)
+
+Returns nvarchar(20)
+With Encryption 
+as
+begin
+Return (select FirstName from DimEmployee Where EmployeeKey = @EmployeeKey)
+End
+
+exec sp_helptext fn_GetEmployeeNameById;
+
+
+Alter Function fn_GetEmployeeNameById(@EmployeeKey int)
+Returns vachar(20)
+With SchemaBinding
+as
+Begin
+Return (Select FirstName from DimEmployee where EmployeeKey = @EmployeeKey)
+end
+ 
+ 
+ DROP TABLE tblEmployees;
