@@ -35,3 +35,34 @@ AS
 SELECT DepartmentName, COUNT(EmployeeKey) AS TotalEmployees
 FROM DimEmployee
 GROUP BY DepartmentName;
+
+
+-- 40. View uuendused (vaadete kaudu andmete muutmine)
+-- Loome vaate ilma palgaandmeteta
+-- Sobib juhtudeks, kus on vaja kuvada ainult üldist töötajate infot
+CREATE VIEW vWEmployeesDataExceptSalary
+AS
+SELECT EmployeeKey, FirstName, Gender, DepartmentName
+FROM DimEmployee;
+
+-- Kuvame andmed loodud vaatest
+SELECT * FROM vWEmployeesDataExceptSalary;
+
+-- Muudame andmeid vaate kaudu
+-- Näites uuendame töötaja (EmployeeKey = 2) eesnime väärtuseks 'Mikey'
+UPDATE vWEmployeesDataExceptSalary
+SET FirstName = 'Mikey'
+WHERE EmployeeKey = 2;
+
+-- Loome vaate, mis sisaldab ka palgaandmeid
+-- Selle vaate abil saab muuta töötaja osakonnakuuluvust
+CREATE VIEW vwEmployeeDetalisByDepartment
+AS
+SELECT EmployeeKey, FirstName, Salary, Gender, DepartmentName
+FROM DimEmployee;
+
+-- Uuendame kirjeid läbi teise vaate
+-- Näites muudame töötaja 'John' osakonna nimeks 'IT'
+UPDATE vwEmployeeDetalisByDepartment
+SET DepartmentName = 'IT'
+WHERE FirstName = 'John';
