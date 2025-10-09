@@ -6,3 +6,14 @@ SELECT EmployeeKey, FirstName, LastName, Salary FROM dbo.DimEmployee;
 -- Otsime töötajaid, kelle palk on diamasoonis 5000 kuni 7000
 SELECT * FROM dbo.DimEmployee
 WHERE Salary > 5000 AND Salary < 7000;
+
+-- Loome indeksi veerule Salary, et parandada päringute jõudlust
+CREATE INDEX IX_DimEmployee_Salary
+ON dbo.DimEmployee (Salary ASC);
+
+-- Käivitame sama päringu uuesti, et hinnata indeksi mõju
+SELECT * FROM dbo.DimEmployee
+WHERE Salary > 5000 AND Salary < 7000;
+
+-- Näitame dbo.DimEmployee tabeli indeksite infot
+EXEC sp_helpindex 'dbo.DimEmployee';
