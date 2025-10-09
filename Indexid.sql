@@ -94,3 +94,21 @@ INSERT INTO tblEmployee VALUES (2, 'John', 'Menco', 2500, 'Male', 'London');
 -- Loome unikaalse mitteklastrindeksi veergudele FirstName ja LastName
 CREATE UNIQUE NONCLUSTERED INDEX UIX_tblEmployee_FirstName_LastName
 ON tblEmployee(FirstName, LastName);
+
+
+-- Lisame tabelile DimEmployee veeru City
+ALTER TABLE DimEmployee 
+ADD City VARCHAR(50);
+
+-- Lisame veerule City unikaalse piirangu (loob taga unikaalse mitteklastrindeksi)
+ALTER TABLE DimEmployee 
+ADD CONSTRAINT UQ_tblEmployee_City 
+UNIQUE NONCLUSTERED (City);
+
+-- Loome unikaalse indeksi veerule City koos IGNORE_DUP_KEY valikuga
+-- See valik võimaldab sisestada duplikaate, mis jäetakse automaatselt tähelepanuta
+CREATE UNIQUE INDEX IX_tblEmployee_City
+ON DimEmployee(City)
+WITH IGNORE_DUP_KEY;
+
+
