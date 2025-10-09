@@ -21,3 +21,20 @@ EXEC sp_helpindex 'dbo.DimEmployee';
 
 -- Kustutame loodud indeksi dbo.DimEmployee tabelilt
 DROP INDEX dbo.DimEmployee.IX_DimEmployee_Salary;
+
+-- Loome tabeli tblEmployee töötajate andmete salvestamiseks
+CREATE TABLE tblEmployee (  
+    Id int PRIMARY KEY,  
+    Name varchar(50),  
+    Salary int,  
+    Gender varchar(10),  
+    City varchar(50) 
+);
+
+-- Lisame tabelisse tblEmployee näidisandmed töötajate kohta
+INSERT INTO tblEmployee VALUES (3,'John',4500,'Male','New York');
+INSERT INTO tblEmployee VALUES (1,'Sam',2500,'Male','London');
+INSERT INTO tblEmployee VALUES (4,'Sara',5500,'Female','Tokyo');
+INSERT INTO tblEmployee VALUES (5,'Todd',3100,'Male','Toronto');
+INSERT INTO tblEmployee VALUES (2,'Pam',6500,'Female','Sydney');
+
