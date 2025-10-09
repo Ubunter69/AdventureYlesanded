@@ -15,5 +15,9 @@ ON dbo.DimEmployee (Salary ASC);
 SELECT * FROM dbo.DimEmployee
 WHERE Salary > 5000 AND Salary < 7000;
 
+
 -- Näitame dbo.DimEmployee tabeli indeksite infot
 EXEC sp_helpindex 'dbo.DimEmployee';
+
+-- Kustutame loodud indeksi dbo.DimEmployee tabelilt
+DROP INDEX dbo.DimEmployee.IX_DimEmployee_Salary;
