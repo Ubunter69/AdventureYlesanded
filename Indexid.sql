@@ -57,7 +57,7 @@ SELECT * FROM tblEmployee WHERE Salary BETWEEN 5000 AND 7000;
 
 -------------------------
 -- Loome klastrindeksi veergudele Gender (kahanev) ja Salary (kasvav)
-CREATE NCLUSTERED INDEX IX_DimEmployee_Gender_Salary
+CREATE CLUSTERED INDEX IX_DimEmployee_Gender_Salary
 ON dbo.DimEmployee (Gender DESC, Salary ASC);
 
 -- Loome mitteklastrindeksi veerule Name, et parandada otsingukiirust nime järgi
@@ -69,3 +69,28 @@ SELECT * FROM dbo.DimEmployee ORDER BY Gender DESC, Salary ASC;
 
 -- Kuvame töötajad, kelle palk jääb vahemikku 5000–7000
 SELECT * FROM dbo.DimEmployee WHERE Salary BETWEEN 5000 AND 7000;
+
+-------------------------------------------------------------Unikaalne ja mitte unikaalne Index---------------------------------------
+--Kustutame tebeli et teha sama tabeli aga natuke teiste andmega
+drop table tblEmployee;
+-- Loome tabeli tblEmployee töötajate andmete salvestamiseks
+CREATE TABLE [tblEmployee]
+(
+    [Id] int Primary Key,
+    [FirstName] nvarchar(50),
+    [LastName] nvarchar(50),
+    [Salary] int,
+    [Gender] nvarchar(10),
+    [City] nvarchar(50)
+);
+
+-- Kuvame tabeli tblEmployee olemasolevad indeksid
+EXECUTE sp_helpindex tblEmployee;
+
+-- Lisame tabelisse tblEmployee näidisandmed töötajate kohta
+INSERT INTO tblEmployee VALUES (1, 'Mike', 'Sandoz', 4500, 'Male', 'New York');
+INSERT INTO tblEmployee VALUES (2, 'John', 'Menco', 2500, 'Male', 'London');
+
+-- Loome unikaalse mitteklastrindeksi veergudele FirstName ja LastName
+CREATE UNIQUE NONCLUSTERED INDEX UIX_tblEmployee_FirstName_LastName
+ON tblEmployee(FirstName, LastName);
